@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: 0.2s ease-out;
+}
+body {
+    background-color: #eee;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+    color: #111;
+}
+main > div {
+    position: relative;
+}
+main > div:last-child {
+    padding: 10px;
+}

@@ -49,10 +49,15 @@
 {% endblock content %}
 {% block script %}
     <script>
-    let url = "{% url 'user_details' 99999 %}"
-    function go_to_details(id) {
-      url = url.replace('99999', id)
-      location.href = url
-    }
-  </script>
+        function delete_user(id) {
+            let delete_url = "{% url 'delete_user' 99999 %}"
+            if (confirm(`Are you sure to delete?`)) {
+              delete_url = delete_url.replace('99999', id)
+              location.href = delete_url
+            } else {
+              console.log('Canceled')
+              alert("Canceled")
+            }
+        }
+    </script>
 {% endblock %}
