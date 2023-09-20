@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block title %}
     <title>Mirsaid's Steam</title>
@@ -15,23 +16,43 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">
-            Upload
-        </button>
+        <button class="btn btn-success" type="submit">Upload</button>
     </form>
-
     <hr>
-    <ol>
-        {% for game in games %}
-            <li>
-                <ul>
-                    <li>{{ game.name_of_game }}</li>
-                    <li>{{ game.author }}</li>
-                    <li>{{ game.genre }}</li>
-                    <li>{{ game.price }}</li>
-                </ul>
-            </li>
-            <hr>
-        {% endfor %}
-    </ol>
+    <div class="container">
+        <table class="table table-secondary table-striped table-hover table-responsive">
+            <tr>
+                <th>№</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Delete user</th>
+            </tr>
+
+            {% for user in users %}
+                <tr>
+                    <th>
+                        <a href="{% url 'user_details' user.id %}">
+                            {{ user.id }}
+                        </a>
+                    </th>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td style="cursor:pointer;" onclick="delete_user({{user.id}})">
+                        ❌
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock content %}
+{% block script %}
+    <script>
+    let url = "{% url 'user_details' 99999 %}"
+    function go_to_details(id) {
+      url = url.replace('99999', id)
+      location.href = url
+    }
+  </script>
+{% endblock %}
