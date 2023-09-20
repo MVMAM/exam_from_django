@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 from .forms import GameForm
@@ -16,16 +15,16 @@ def first_view(request):
 
     return render(request, 'index.html', context)
 
-def game_details(request, user_id):
-    user = Game.objects.get(id=user_id)
-    context = {'user': user}
+def game_details(request, game_id):
+    game = Game.objects.get(id=game_id)
+    context = {'game': game}
     return render(request, 'game_details.html', context)
 
 def delete_game(request, del_id):
-    user = Game.objects.get(id=del_id)
-    print(user.first_name)
-    user.delete()
-    print(user.first_name)
+    game = Game.objects.get(id=del_id)
+    print(game.name_of_game)
+    game.delete()
+    print(game.name_of_game)
 
     context = get_games_context()
     return render(request, 'index.html', context)
