@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Mirsaid's Steam</title>
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock link %}
+
+{% block content %}
+    <h1>Upload your game</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+            Upload
+        </button>
+    </form>
+
+    <hr>
+    <ol>
+        {% for game in games %}
+            <li>
+                <ul>
+                    <li>{{ game.name_of_game }}</li>
+                    <li>{{ game.author }}</li>
+                    <li>{{ game.genre }}</li>
+                    <li>{{ game.price }}</li>
+                </ul>
+            </li>
+            <hr>
+        {% endfor %}
+    </ol>
+{% endblock content %}
