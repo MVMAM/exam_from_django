@@ -23,23 +23,25 @@
         <table class="table table-secondary table-striped table-hover table-responsive">
             <tr>
                 <th>№</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Delete user</th>
+                <th>Name of game</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Delete game</th>
             </tr>
 
-            {% for user in users %}
+            {% for game in games %}
                 <tr>
                     <th>
-                        <a href="{% url 'user_details' user.id %}">
-                            {{ user.id }}
+                        <a href="{% url 'game_details' game.id %}">
+                            {{ game.id }}
                         </a>
                     </th>
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td style="cursor:pointer;" onclick="delete_user({{user.id}})">
+                    <td>{{ game.name_of_game }}</td>
+                    <td>{{ game.author }}</td>
+                    <td>{{ game.genre }}</td>
+                    <td>{{ game.price }}</td>
+                    <td style="cursor:pointer;" onclick="delete_game({{game.id}})">
                         ❌
                     </td>
                 </tr>
@@ -50,13 +52,13 @@
 {% block script %}
     <script>
         function delete_user(id) {
-            let delete_url = "{% url 'delete_user' 99999 %}"
+            let delete_url = "{% url 'delete_game' 99999 %}"
             if (confirm(`Are you sure to delete?`)) {
-              delete_url = delete_url.replace('99999', id)
-              location.href = delete_url
+                delete_url = delete_url.replace('99999', id)
+                location.href = delete_url
             } else {
-              console.log('Canceled')
-              alert("Canceled")
+                console.log('Canceled')
+                alert("Canceled")
             }
         }
     </script>
